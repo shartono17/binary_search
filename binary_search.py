@@ -1,13 +1,25 @@
 #!/bin/python3
 
 def find_smallest_positive(xs):
-    '''
-    Assume that xs is a list of numbers sorted from LOWEST to HIGHEST.
-    Find the index of the smallest positive number.
-    If no such index exists, return `None`.
 
-    HINT: 
-    This is essentially the binary search algorithm from class,
+    #xs.sort()
+    left = 0
+    right = len(xs)-1
+    def binsort(left, right):
+        mid=(left+right)/len(xs)
+        if val <xs[mid]: right = mid-1
+        if val > xs[mid]: left = mid+1
+        if val == xs[mid]: return mid
+        if left == right != 0: return None
+    return binsort(left,right)
+
+    '''
+    Assume that xs is a list of numbers sorted from LOWEST to HIGHEST
+    Find the index of the smallest positive number.
+    If no such index exists, return 'None'
+    
+    HINT:
+    This is essentially the binary search algorithm from class, 
     but you're always searching for 0.
 
     >>> find_smallest_positive([-3, -2, -1, 0, 1, 2, 3])
@@ -20,6 +32,14 @@ def find_smallest_positive(xs):
 
 
 def count_repeats(xs, x):
+    
+    if len(xs) <= 1: return False
+    if xs[0]== x]:
+        return count
+
+    
+
+
     '''
     Assume that xs is a list of numbers sorted from HIGHEST to LOWEST,
     and that x is a number.
@@ -61,4 +81,5 @@ def argmin(f, lo, hi, epsilon=1e-3):
     >>> argmin(lambda x: (x-5)**2, -20, 0)
     -0.00016935087808430278
     '''
+
 
