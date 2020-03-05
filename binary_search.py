@@ -103,9 +103,8 @@ def argmin(f, lo, hi, epsilon=1e-3):
     right = hi
     
     def go(left, right):
-     
-        m1 = lo + (hi-lo)/6
-        m2 = lo + (hi-lo)/3
+        m1 = left + (right-left)/6
+        m2 = left + (right-left)/3
         
         if right-left < epsilon: return right
 
