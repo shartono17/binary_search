@@ -68,11 +68,11 @@ def count_repeats(xs, x):
         if x < xs[mid]: return looklast(mid+1, right)
         if x > xs[mid]: return looklast(left, mid-1)
 
-    upbound = findfirst(left, right)
-    lowerbound = looklast(left, right)
-    if upbound == None or lowerbound == None:
+    up = findfirst(left, right)
+    down = looklast(left, right)
+    if up == None or down == None:
         return 0
-    else: return lowerbound - upbound +1
+    else: return down-up +1
 
    
 
