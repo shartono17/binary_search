@@ -50,21 +50,21 @@ def count_repeats(xs, x):
 
     def findfirst(left,right):
         mid = (left+right)//2
-        if left == right: return None
         if xs[mid] == x:
             if mid == 0 or xs[mid-1] > x:
                 return mid
             else: return findfirst(left, mid-1)
+        if left == right: return None
         if x < xs[mid]: return findfirst(mid+1, right)
         if x > xs[mid]: return findfirst(left, mid-1)
 
     def looklast(left, right):
         mid = (left+right)//2
-        if left == right: return None
-        if xs[mid] == x:
+        if x == xs[mid]:
             if mid == len(xs)-1 or x > xs[mid+1]:
                 return mid
             else: return looklast(mid+1, right)
+        if left == right: return None
         if x < xs[mid]: return looklast(mid+1, right)
         if x > xs[mid]: return looklast(left, mid-1)
 
@@ -104,8 +104,8 @@ def argmin(f, lo, hi, epsilon=1e-3):
     
     def go(left, right):
      
-        m1 = lo + (hi-lo)/4
-        m2 = lo + (hi-lo)/2
+        m1 = lo + (hi-lo)/6
+        m2 = lo + (hi-lo)/3
         
         if right-left < epsilon: return right
 
