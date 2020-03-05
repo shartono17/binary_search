@@ -32,10 +32,27 @@ def find_smallest_positive(xs):
 
 
 def count_repeats(xs, x):
-    
-    if len(xs) <= 1: return False
-    if xs[0]== x]:
-        return count
+    upper = x+1
+    lower = x-1
+
+    left = 0
+    right = len(xs)
+
+    if len(xs) == 0: return False
+    def binsort(left,right, val):
+        mid = (left+right)/len(xs)
+        if val < xs[mid]: right = mid-1
+        if val> xs[mid]: left = mid+1
+        if val == xs[mid]: return mid
+        if left == right: return None
+
+    upbound = binsort(left, right, upper)
+    lowerbound = binsort(left, right, lower)
+    freqcount = upperbound - lowerbound
+    return freqcount
+
+
+
 
     
 
