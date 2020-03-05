@@ -81,7 +81,11 @@ def argmin(f, lo, hi, epsilon=1e-3):
     else: 
         m1 = math.uniform(lo, hi)
         m2 = math.uniform(lo,hi)
-        if m2< m1:
+        if f(m2) < f(m1):
+            return argmin(f, m1, hi, epsilon=1e-3)
+        if f(m2) >= f(m1):
+            return argmin(f, lo, m2, epsilon=1e-3)
+    
 
 
     '''
