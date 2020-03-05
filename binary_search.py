@@ -3,12 +3,12 @@
 import math
 
 def find_smallest_positive(xs):
-
+    if xs ==[]: return None
     #xs.sort()
     left = 0
     right = len(xs)-1
     def binsort(left, right):
-        mid=(left+right)/len(xs)
+        mid=(left+right)//2
         if 0 <xs[mid]: right = mid-1
         if 0 > xs[mid]: left = mid+1
         if 0 == xs[mid]: return mid+1
@@ -42,7 +42,7 @@ def count_repeats(xs, x):
 
     if len(xs) == 0: return False
     def binsort(left,right, val):
-        mid = (left+right)/len(xs)
+        mid = (left+right)//2
         if val < xs[mid]: right = mid-1
         if val> xs[mid]: left = mid+1
         if val == xs[mid]: return mid
@@ -77,7 +77,7 @@ def count_repeats(xs, x):
 
 def argmin(f, lo, hi, epsilon=1e-3):
 
-    if math.abs(hi-lo) < epsilon: return lo
+    if abs(hi-lo) < epsilon: return lo
     else: 
         m1 = math.uniform(lo, hi)
         m2 = math.uniform(lo,hi)
