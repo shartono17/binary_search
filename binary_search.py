@@ -9,10 +9,14 @@ def find_smallest_positive(xs):
     right = len(xs)-1
     def binsort(left, right):
         mid=(left+right)//2
-        if 0 <xs[mid]: right = mid-1
-        if 0 > xs[mid]: left = mid+1
         if 0 == xs[mid]: return mid+1
-        if left == right : return None
+        if left == right:
+            if xs[mid] > 0:
+                return mid
+            else: return None
+        if 0 <xs[mid]: return binsort(left, mid-1)
+        if 0 > xs[mid]: return binsort(mid+1, right)
+        if left == right: return None
     return binsort(left,right)
 
     '''
@@ -34,24 +38,41 @@ def find_smallest_positive(xs):
 
 
 def count_repeats(xs, x):
-    upper = x+1
-    lower = x-1
+
+    # upper = x+1
+    # lower = x-1
 
     left = 0
     right = len(xs)-1
 
-    if len(xs) == 0: return False
-    def binsort(left,right, val):
-        mid = (left+right)//2
-        if val < xs[mid]: right = mid-1
-        if val> xs[mid]: left = mid+1
-        if val == xs[mid]: return mid
-        if left == right: return None
+    if len(xs) == 0: return 0
 
-    upbound = binsort(left, right, upper)
-    lowerbound = binsort(left, right, lower)
-    freqcount = upbound - lowerbound
-    return freqcount
+    def findfirst(left,right):
+        mid = (left+right)//2
+        if left == right: return None
+        if xs[mid] == x:
+            if mid == 0 or xs[mid-1] > x:
+                return mid
+            else: return findfirst(left, mid-1)
+        if x < xs[mid]: return findfirst(mid+1, right)
+        if x > xs[mid]: return findfirst(left, mid-1)
+
+    def looklast(left, right):
+        mid = (left+right)//2
+        if left == right: return None
+        if xs[mid] == x:
+            if mid == len(xs)-1 or x > xs[mid+1]:
+                return mid
+            else: return looklast(mid+1, right)
+        if x < xs[mid]: return looklast(mid+1, right)
+        if x > xs[mid]: return looklast(left, mid-1)
+
+    upbound = findfirst(left, right)
+    lowerbound = looklast(left, right)
+    if upbound == None or lowerbound == None:
+        return None
+    else: return lowerbound - upbound +1
+
    
 
     '''
@@ -77,14 +98,14 @@ def count_repeats(xs, x):
 
 def argmin(f, lo, hi, epsilon=1e-3):
 
-    if abs(hi-lo) < epsilon: return lo
-    else: 
-        m1 = uniform(lo, hi)
-        m2 = uniform(lo,hi)
-        if f(m2) < f(m1):
-            return argmin(f, m1, hi, epsilon=1e-3)
-        if f(m2) >= f(m1):
-            return argmin(f, lo, m2, epsilon=1e-3)
+    if hi-lo < epsilon: return lo
+     
+    m1 = lo + (hi-lo)/4
+    m2 = lo + (hi-lo)/2
+    if f(m2) < f(m1):
+        return argmin(f, m1, hi, epsilon=1e-3)
+    if f(m2) > f(m1):
+        return argmin(f, lo, m2, epsilon=1e-3)
     
 
 
