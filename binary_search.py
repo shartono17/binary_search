@@ -1,5 +1,7 @@
 #!/bin/python3
 
+import math
+
 def find_smallest_positive(xs):
 
     #xs.sort()
@@ -7,10 +9,10 @@ def find_smallest_positive(xs):
     right = len(xs)-1
     def binsort(left, right):
         mid=(left+right)/len(xs)
-        if val <xs[mid]: right = mid-1
-        if val > xs[mid]: left = mid+1
-        if val == xs[mid]: return mid
-        if left == right != 0: return None
+        if 0 <xs[mid]: right = mid-1
+        if 0 > xs[mid]: left = mid+1
+        if 0 == xs[mid]: return mid+1
+        if left == right < 0: return None
     return binsort(left,right)
 
     '''
@@ -36,7 +38,7 @@ def count_repeats(xs, x):
     lower = x-1
 
     left = 0
-    right = len(xs)
+    right = len(xs)-1
 
     if len(xs) == 0: return False
     def binsort(left,right, val):
@@ -50,12 +52,7 @@ def count_repeats(xs, x):
     lowerbound = binsort(left, right, lower)
     freqcount = upperbound - lowerbound
     return freqcount
-
-
-
-
-    
-
+   
 
     '''
     Assume that xs is a list of numbers sorted from HIGHEST to LOWEST,
@@ -79,6 +76,14 @@ def count_repeats(xs, x):
 
 
 def argmin(f, lo, hi, epsilon=1e-3):
+
+    if math.abs(hi-lo) < epsilon: return lo
+    else: 
+        m1 = math.uniform(lo, hi)
+        m2 = math.uniform(lo,hi)
+        if m2< m1:
+
+
     '''
     Assumes that f is an input function that takes a float as input and returns a float with a unique global minimum,
     and that lo and hi are both floats satisfying lo < hi.
