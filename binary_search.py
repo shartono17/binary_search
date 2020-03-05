@@ -4,6 +4,7 @@ import math
 
 def find_smallest_positive(xs):
     if xs ==[]: return None
+    if xs[0] > 0: return 0
     #xs.sort()
     left = 0
     right = len(xs)-1
@@ -70,7 +71,7 @@ def count_repeats(xs, x):
     upbound = findfirst(left, right)
     lowerbound = looklast(left, right)
     if upbound == None or lowerbound == None:
-        return None
+        return 0
     else: return lowerbound - upbound +1
 
    
@@ -98,14 +99,20 @@ def count_repeats(xs, x):
 
 def argmin(f, lo, hi, epsilon=1e-3):
 
-    if hi-lo < epsilon: return lo
+    left = lo
+    right = hi
+    
+    def go(left, right):
      
-    m1 = lo + (hi-lo)/4
-    m2 = lo + (hi-lo)/2
-    if f(m2) < f(m1):
-        return argmin(f, m1, hi, epsilon=1e-3)
-    if f(m2) > f(m1):
-        return argmin(f, lo, m2, epsilon=1e-3)
+        m1 = lo + (hi-lo)/4
+        m2 = lo + (hi-lo)/2
+        
+        if right-left < epsilon: return right
+
+        if f(m1) < f(m2):
+            return go(left, m2)
+        if f(m1) > f(m2):
+            return go(m1, right)
     
 
 
