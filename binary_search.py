@@ -12,7 +12,7 @@ def find_smallest_positive(xs):
         if 0 <xs[mid]: right = mid-1
         if 0 > xs[mid]: left = mid+1
         if 0 == xs[mid]: return mid+1
-        if left == right < 0: return None
+        if left == right : return None
     return binsort(left,right)
 
     '''
@@ -50,7 +50,7 @@ def count_repeats(xs, x):
 
     upbound = binsort(left, right, upper)
     lowerbound = binsort(left, right, lower)
-    freqcount = upperbound - lowerbound
+    freqcount = upbound - lowerbound
     return freqcount
    
 
@@ -79,8 +79,8 @@ def argmin(f, lo, hi, epsilon=1e-3):
 
     if abs(hi-lo) < epsilon: return lo
     else: 
-        m1 = math.uniform(lo, hi)
-        m2 = math.uniform(lo,hi)
+        m1 = uniform(lo, hi)
+        m2 = uniform(lo,hi)
         if f(m2) < f(m1):
             return argmin(f, m1, hi, epsilon=1e-3)
         if f(m2) >= f(m1):
